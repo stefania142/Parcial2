@@ -146,3 +146,5 @@ function main() {
 }
 main();
 }); 
+
+//link de ia: https://chatgpt.com/c/69eba767-90e0-83e9-91c9-80867744f71c
