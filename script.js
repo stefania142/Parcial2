@@ -4,6 +4,7 @@
  * Estudiante: Stefania Triana Rodriguez
  */
 //canvas 
+document.addEventListener("DOMContentLoaded", () => {
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -14,17 +15,13 @@ function plotPixel(ctx, x, y, color = "#1a1a1a") {
     ctx.fillRect(Math.floor(x), Math.floor(y), 3, 3);
 }
 
-// prueba mínima
-plotPixel(ctx, 400, 300, "red");
-plotPixel(ctx, 401, 300, "red");
-plotPixel(ctx, 400, 301, "red");
-
 //funcion para implementar un algorirmo de punto medio para la circunferencia  
 
-function midpointCircle(cx, cy, r, color = "#1a1a11") {
+function midpointCircle(cx, cy, r, color = "#1a1a1a") {
     let x = 0;
     let y = r;
     let p = 1 - r;
+
     //dibuja los puntos iniciales
     function draw(x, y) {
         plotPixel(ctx, cx + x, cy + y, color);
@@ -100,7 +97,7 @@ function getOrbitalPositions(cx, cy, r, n) {
 
     return positions;
 }
-
+// Función para calcular los vértices de un polígono regular dado su centro, radio y cantidad de lados
 function getPolygonVertices(cx, cy, radius, sides) {
     let vertices = [];
 
@@ -108,14 +105,14 @@ function getPolygonVertices(cx, cy, radius, sides) {
         let angle = (2 * Math.PI * i) / sides;
 
         vertices.push({
-            x: cx + radius * Math.cos(angle),
-            y: cy + radius * Math.sin(angle)
+            x: Math.round(cx + radius * Math.cos(angle)),
+            y: Math.round(cy + radius * Math.sin(angle))
         });
     }
 
     return vertices;
 }
-
+// Función para dibujar un polígono dado sus vértices
 function drawPolygon(vertices) {
     for (let i = 0; i < vertices.length; i++) {
         let next = (i + 1) % vertices.length;
@@ -148,3 +145,4 @@ function main() {
     });
 }
 main();
+}); 
