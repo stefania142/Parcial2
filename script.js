@@ -83,3 +83,47 @@ function bresenhamLine(x0, y0, x1, y1, color = "#1a1a1a") {
 // pruebas
 bresenhamLine(100, 100, 300, 200);
 bresenhamLine(300, 200, 100, 400);
+
+
+function getOrbitalPositions(cx, cy, r, n) {
+    let positions = [];
+
+    for (let i = 0; i < n; i++) {
+        let angle = (2 * Math.PI * i) / n;
+
+        positions.push({
+            x: cx + r * Math.cos(angle),
+            y: cy + r * Math.sin(angle)
+        });
+    }
+
+    return positions;
+}
+
+function getPolygonVertices(cx, cy, radius, sides) {
+    let vertices = [];
+
+    for (let i = 0; i < sides; i++) {
+        let angle = (2 * Math.PI * i) / sides;
+
+        vertices.push({
+            x: cx + radius * Math.cos(angle),
+            y: cy + radius * Math.sin(angle)
+        });
+    }
+
+    return vertices;
+}
+
+function drawPolygon(vertices) {
+    for (let i = 0; i < vertices.length; i++) {
+        let next = (i + 1) % vertices.length;
+
+        bresenhamLine(
+            vertices[i].x,
+            vertices[i].y,
+            vertices[next].x,
+            vertices[next].y
+        );
+    }
+}
