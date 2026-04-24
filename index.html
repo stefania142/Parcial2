@@ -1,24 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dispersión Geométrica Orbital</title>
+<meta charset="UTF-8">
+<title>Parcial 2</title>
+<style>
+    canvas { border: 1px solid black; }
+</style>
 </head>
 <body>
-    <canvas id="canvas" width="800" height="600"></canvas>
 
-<script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+<canvas id="canvas" width="800" height="600"></canvas>
 
-function plotPixel(ctx, x, y, color = "#000") {
-    ctx.fillStyle = color;
-    ctx.fillRect(Math.floor(x), Math.floor(y), 1, 1);
-}
-
-// prueba simple
-plotPixel(ctx, 400, 300, "red");
-</script>
+<script src="script.js"></script>
 </body>
 </html>
