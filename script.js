@@ -3,12 +3,15 @@
  * Asignatura: Introducción a la Computación Gráfica
  * Estudiante: Stefania Triana Rodriguez
  */
+//canvas 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+//funcion para plotear un pixel en el canvas
+
 function plotPixel(ctx, x, y, color = "#1a1a1a") {
     ctx.fillStyle = color;
-    ctx.fillRect(Math.floor(x), Math.floor(y), 1, 1);
+    ctx.fillRect(Math.floor(x), Math.floor(y), 3, 3);
 }
 
 // prueba mínima
@@ -16,11 +19,13 @@ plotPixel(ctx, 400, 300, "red");
 plotPixel(ctx, 401, 300, "red");
 plotPixel(ctx, 400, 301, "red");
 
+//funcion para implementar un algorirmo de punto medio para la circunferencia  
+
 function midpointCircle(cx, cy, r, color = "#1a1a11") {
     let x = 0;
     let y = r;
     let p = 1 - r;
-
+    //dibuja los puntos iniciales
     function draw(x, y) {
         plotPixel(ctx, cx + x, cy + y, color);
         plotPixel(ctx, cx - x, cy + y, color);
@@ -31,7 +36,7 @@ function midpointCircle(cx, cy, r, color = "#1a1a11") {
         plotPixel(ctx, cx + y, cy - x, color);
         plotPixel(ctx, cx - y, cy - x, color);
     }
-
+    
     while (x <= y) {
         draw(x, y);
         x++;
@@ -47,3 +52,34 @@ function midpointCircle(cx, cy, r, color = "#1a1a11") {
 
 // prueba
 midpointCircle(400, 300, 150);
+
+//funcion para el algoritmo de Bresenham
+
+function bresenhamLine(x0, y0, x1, y1, color = "#1a1a1a") {
+    let dx = Math.abs(x1 - x0);
+    let dy = Math.abs(y1 - y0);
+    let sx = x0 < x1 ? 1 : -1;
+    let sy = y0 < y1 ? 1 : -1;
+    let err = dx - dy;
+
+    while (true) {
+        plotPixel(ctx, x0, y0, color);
+
+        if (x0 === x1 && y0 === y1) break;
+
+        let e2 = 2 * err;
+
+        if (e2 > -dy) {
+            err -= dy;
+            x0 += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+
+// pruebas
+bresenhamLine(100, 100, 300, 200);
+bresenhamLine(300, 200, 100, 400);
