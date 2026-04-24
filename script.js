@@ -50,9 +50,6 @@ function midpointCircle(cx, cy, r, color = "#1a1a11") {
     }
 }
 
-// prueba
-midpointCircle(400, 300, 150);
-
 //funcion para el algoritmo de Bresenham
 
 function bresenhamLine(x0, y0, x1, y1, color = "#1a1a1a") {
@@ -80,10 +77,14 @@ function bresenhamLine(x0, y0, x1, y1, color = "#1a1a1a") {
     }
 }
 
-// pruebas
-bresenhamLine(100, 100, 300, 200);
-bresenhamLine(300, 200, 100, 400);
-
+/**
+ * Retorna los centros donde se ubicarán los polígonos
+ * @param {number} cx - Coordenada x del centro de la órbita
+ * @param {number} cy - Coordenada y del centro de la órbita
+ * @param {number} r - Radio de la órbita
+ * @param {number} n - Cantidad de polígonos
+ * @returns {Array} [{x, y}, ...]
+ */
 
 function getOrbitalPositions(cx, cy, r, n) {
     let positions = [];
@@ -127,3 +128,23 @@ function drawPolygon(vertices) {
         );
     }
 }
+// Función principal para ejecutar el programa
+
+function main() {
+    const cx = 400;
+    const cy = 300;
+
+    const R = Math.floor(Math.random() * 100) + 150;
+    const N = Math.floor(Math.random() * 7) + 4;
+    const k = Math.floor(Math.random() * 5) + 3;
+
+    midpointCircle(cx, cy, R, "#bbb");
+
+    let centers = getOrbitalPositions(cx, cy, R, N);
+
+    centers.forEach(c => {
+        let vertices = getPolygonVertices(c.x, c.y, 30, k);
+        drawPolygon(vertices);
+    });
+}
+main();
